@@ -10,6 +10,7 @@ public class Person {
     this.age = age;
     this.name = name;
   }
+
   // This Method getAge to output client's age(string)
   public String getAge() {
     return this.age;

@@ -34,27 +34,27 @@ public class InsuranceSystem {
 
   public void createNewProfile(String userName, String age) {
     // Change userName to Titled case
-    String titled_name =
+    String titledName =
         userName.substring(0, 1).toUpperCase() + userName.substring(1).toLowerCase();
-    double Age = Double.parseDouble(age);
+    double ageDouble = Double.parseDouble(age);
 
     // Check name matches inside database.
     if (clients.isEmpty() == false) {
       for (int i = 0; i < clients.size(); i++) {
-        if (clients.get(i).getName().equals(titled_name)) {
-          MessageCli.INVALID_USERNAME_NOT_UNIQUE.printMessage(titled_name);
+        if (clients.get(i).getName().equals(titledName)) {
+          MessageCli.INVALID_USERNAME_NOT_UNIQUE.printMessage(titledName);
           return;
         }
       }
     }
 
     if (userName.length() < 3) {
-      MessageCli.INVALID_USERNAME_TOO_SHORT.printMessage(titled_name);
-    } else if ((Age < 0) || (Age > 0 && Age % 1 != 0)) {
-      MessageCli.INVALID_AGE.printMessage(age, titled_name);
+      MessageCli.INVALID_USERNAME_TOO_SHORT.printMessage(titledName);
+    } else if ((ageDouble < 0) || (ageDouble > 0 && ageDouble % 1 != 0)) {
+      MessageCli.INVALID_AGE.printMessage(age, titledName);
     } else {
-      MessageCli.PROFILE_CREATED.printMessage(titled_name, age);
-      Person client = new Person(age, titled_name);
+      MessageCli.PROFILE_CREATED.printMessage(titledName, age);
+      Person client = new Person(age, titledName);
       clients.add(client);
     }
   }
