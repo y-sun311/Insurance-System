@@ -17,17 +17,25 @@ public class InsuranceSystem {
       MessageCli.PRINT_DB_POLICY_COUNT.printMessage("0", "s", ".");
     } else if (clients.size() == 1) {
       MessageCli.PRINT_DB_POLICY_COUNT.printMessage("1", ":", "");
-      System.out.println(" 1: " + clients.get(0).getName() + ", " + clients.get(0).getAge());
+      // Check if the client is loaded.
+      if (clients.get(0).getLoadStatus() == 1) {
+        MessageCli.PRINT_DB_PROFILE_HEADER_SHORT.printMessage(
+            "*** ", "1", clients.get(0).getName(), clients.get(0).getAge());
+      } else {
+        MessageCli.PRINT_DB_PROFILE_HEADER_MINIMAL.printMessage(
+            "1", clients.get(0).getName(), clients.get(0).getAge());
+      }
     } else if (clients.size() > 1) {
       MessageCli.PRINT_DB_POLICY_COUNT.printMessage(String.valueOf(clients.size()), "s", ":");
       for (int j = 0; j < clients.size(); j++) {
-        System.out.println(
-            " "
-                + String.valueOf(j + 1)
-                + ": "
-                + clients.get(j).getName()
-                + ", "
-                + clients.get(j).getAge());
+        // Check if a client is loaded.
+        if (clients.get(j).getLoadStatus() == 1) {
+          MessageCli.PRINT_DB_PROFILE_HEADER_SHORT.printMessage(
+              "*** ", String.valueOf(j + 1), clients.get(j).getName(), clients.get(j).getAge());
+        } else {
+          MessageCli.PRINT_DB_PROFILE_HEADER_MINIMAL.printMessage(
+              String.valueOf(j + 1), clients.get(j).getName(), clients.get(j).getAge());
+        }
       }
     }
   }
@@ -64,11 +72,64 @@ public class InsuranceSystem {
     }
   }
 
-  public void loadProfile(String userName) {}
+  public void loadProfile(String userName) {
+    // Change userName to Titled case
+    String titledName =
+        userName.substring(0, 1).toUpperCase() + userName.substring(1).toLowerCase();
 
-  public void unloadProfile() {}
+    // Check if name matches.
+    if (clients.isEmpty() == false) {
+      // Check if a client is already loaded.
+      for (int i = 0; i < clients.size(); i++) {
+        if (clients.get(i).getLoadStatus() == 1) {
+          clients.get(i).setLoadStatus(0);
+        }
+      }
 
-  public void deleteProfile(String userName) {}
+      for (int j = 0; j < clients.size(); j++) {
+        if (clients.get(j).getName().equals(titledName)) {
+          MessageCli.PROFILE_LOADED.printMessage(titledName);
+          clients.get(j).setLoadStatus(1);
+          return;
+        }
+      }
+    }
+
+    MessageCli.NO_PROFILE_FOUND_TO_LOAD.printMessage(titledName);
+  }
+
+  public void unloadProfile() {
+    for (int i = 0; i < clients.size(); i++) {
+      if (clients.get(i).getLoadStatus() == 1) {
+        MessageCli.PROFILE_UNLOADED.printMessage(clients.get(i).getName());
+        clients.get(i).setLoadStatus(0);
+        return;
+      }
+    }
+    System.out.println("No profile is currently loaded.");
+  }
+
+  public void deleteProfile(String userName) {
+    // Change userName to titled case
+    String titledName =
+        userName.substring(0, 1).toUpperCase() + userName.substring(1).toLowerCase();
+
+    for (int i = 0; i < clients.size(); i++) {
+      if (clients.get(i).getName().equals(titledName)) {
+        // Cannot delete the client if loaded.
+        if (clients.get(i).getLoadStatus() == 1) {
+          MessageCli.CANNOT_DELETE_PROFILE_WHILE_LOADED.printMessage(titledName);
+          return;
+        } else {
+          MessageCli.PROFILE_DELETED.printMessage(titledName);
+          clients.remove(i);
+          return;
+        }
+      }
+    }
+
+    MessageCli.NO_PROFILE_FOUND_TO_DELETE.printMessage(titledName);
+  }
 
   public void createPolicy(PolicyType type, String[] options) {}
 }
