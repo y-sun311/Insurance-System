@@ -1,10 +1,58 @@
 package nz.ac.auckland.se281;
 
+import java.util.ArrayList;
+
 public class Person {
 
   private String name;
   private String age;
   private int loadStatus;
+  ArrayList<Policy> policies = new ArrayList<Policy>();
+
+  // Add a policy to the client's policy list.
+  public void addPolicy(Policy policy) {
+    policies.add(policy);
+  }
+
+  // Check how many policies the client has.
+  public int getPolicyCount() {
+    return policies.size();
+  }
+
+  public int getTotalPremium() {
+    int totalPremium = 0;
+    // Check if client has no policies.
+    if (policies.size() == 0) {
+      return 0;
+    }
+    for (int i = 0; i < policies.size(); i++) {
+      totalPremium += getDiscount(i);
+    }
+
+    return totalPremium;
+  }
+  // This method getDiscount to output the discount of a policy (if not eligible for discount,
+  // return basePremium).
+  public int getDiscount(int numInArrlist) {
+    if (policies.size() == 2) {
+      return policies.get(numInArrlist).getDiscountPremium2();
+    } else if (policies.size() >= 3) {
+      return policies.get(numInArrlist).getDiscountPremium3();
+    } else {
+      return policies.get(numInArrlist).basePremium;
+    }
+  }
+
+  // Check number of Life policies the client has.
+  public int getLifePolicyCount() {
+    int lifePolicyCount = 0;
+    for (int i = 0; i < policies.size(); i++) {
+      if (policies.get(i) instanceof LifePolicy) {
+        lifePolicyCount++;
+      }
+    }
+    return lifePolicyCount;
+  }
 
   // Person class contains age and name of a new client.
   public Person(String age, String name) {
