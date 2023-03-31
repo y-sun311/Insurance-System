@@ -31,6 +31,7 @@ public class Person {
 
     return totalPremium;
   }
+
   // This method getDiscount to output the discount of a policy (if not eligible for discount,
   // return basePremium).
   public int getDiscount(int numInArrlist) {
