@@ -17,6 +17,19 @@ public class CarPolicy extends Policy {
     }
     this.age = age;
     this.discount = 0;
+  }
+
+  public String getCarMakeModel() {
+    return this.carMakeModel;
+  }
+
+  public String getCarRegNum() {
+    return this.carRegNum;
+  }
+
+  // Override abstract method from Policy class to calculate basePremium.
+  @Override
+  public void setBasePremium() {
     if (age >= 25) {
       double doublePremium = 0.10 * sumInsured;
       this.basePremium = (int) Math.round(doublePremium);
@@ -28,13 +41,5 @@ public class CarPolicy extends Policy {
     if (coverMechBreakdown) {
       this.basePremium = this.basePremium + 80;
     }
-  }
-
-  public String getCarMakeModel() {
-    return this.carMakeModel;
-  }
-
-  public String getCarRegNum() {
-    return this.carRegNum;
   }
 }

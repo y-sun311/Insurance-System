@@ -7,6 +7,10 @@ public class LifePolicy extends Policy {
     this.sumInsured = Integer.valueOf(stringInput[0]);
     this.age = age;
     this.discount = 0;
+  }
+
+  @Override
+  public void setBasePremium() {
     double doublePremium = (1 + ((double) age / 100)) * 0.01 * (double) sumInsured;
     this.basePremium = (int) Math.round(doublePremium);
   }

@@ -302,6 +302,8 @@ public class InsuranceSystem {
                   new LifePolicy(options, Integer.valueOf(clients.get(i).getAge()));
               clients.get(i).addPolicy(newLifePolicy);
               MessageCli.NEW_POLICY_CREATED.printMessage("life", clients.get(i).getName());
+              // Set base premium for lifePolicy.
+              newLifePolicy.setBasePremium();
               return;
             }
           case CAR:
@@ -310,6 +312,8 @@ public class InsuranceSystem {
                 new CarPolicy(options, Integer.valueOf(clients.get(i).getAge()));
             clients.get(i).addPolicy(newCarPolicy);
             MessageCli.NEW_POLICY_CREATED.printMessage("car", clients.get(i).getName());
+            // Set base premium for carPolicy.
+            newCarPolicy.setBasePremium();
             return;
 
           case HOME:
@@ -318,11 +322,12 @@ public class InsuranceSystem {
                 new HomePolicy(options, Integer.valueOf(clients.get(i).getAge()));
             clients.get(i).addPolicy(newHomePolicy);
             MessageCli.NEW_POLICY_CREATED.printMessage("home", clients.get(i).getName());
+            // Set base premium for homePolicy.
+            newHomePolicy.setBasePremium();
             return;
         }
       }
-    }
-
+    } // No profile is loaded and cannot create policy.
     MessageCli.NO_PROFILE_FOUND_TO_CREATE_POLICY.printMessage();
   }
   // Print policy details.

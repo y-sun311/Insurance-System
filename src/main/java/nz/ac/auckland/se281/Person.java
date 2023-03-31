@@ -35,9 +35,9 @@ public class Person {
   // return basePremium).
   public int getDiscount(int numInArrlist) {
     if (policies.size() == 2) {
-      return policies.get(numInArrlist).getDiscountPremium2();
+      return policies.get(numInArrlist).getDiscountedPremium2();
     } else if (policies.size() >= 3) {
-      return policies.get(numInArrlist).getDiscountPremium3();
+      return policies.get(numInArrlist).getDiscountedPremium3();
     } else {
       return policies.get(numInArrlist).basePremium;
     }

@@ -14,15 +14,20 @@ public class HomePolicy extends Policy {
       this.rentOut = false;
     }
     this.age = age;
+    this.discount = 0;
+  }
+
+  public String getAddress() {
+    return this.address;
+  }
+
+  @Override
+  public void setBasePremium() {
     if (rentOut) {
       this.basePremium = (int) Math.round(0.02 * (double) sumInsured);
 
     } else {
       this.basePremium = (int) Math.round(0.01 * (double) sumInsured);
     }
-  }
-
-  public String getAddress() {
-    return this.address;
   }
 }
