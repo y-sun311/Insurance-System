@@ -330,22 +330,23 @@ public class InsuranceSystem {
     } // No profile is loaded and cannot create policy.
     MessageCli.NO_PROFILE_FOUND_TO_CREATE_POLICY.printMessage();
   }
+
   // Print policy details.
   public static void printPolicy(Policy policy, int discounted) {
-
+    // If the policy is a car policy.
     if (policy instanceof CarPolicy) {
       MessageCli.PRINT_DB_CAR_POLICY.printMessage(
           ((CarPolicy) policy).getCarMakeModel(),
           Integer.toString(policy.sumInsured),
           String.valueOf(policy.basePremium),
           String.valueOf(discounted));
-
+      // If the policy is a life policy.
     } else if (policy instanceof LifePolicy) {
       MessageCli.PRINT_DB_LIFE_POLICY.printMessage(
           Integer.toString(policy.sumInsured),
           String.valueOf(policy.basePremium),
           String.valueOf(discounted));
-
+      // If the policy is a home policy.
     } else if (policy instanceof HomePolicy) {
       MessageCli.PRINT_DB_HOME_POLICY.printMessage(
           ((HomePolicy) policy).getAddress(),

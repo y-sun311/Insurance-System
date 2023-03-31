@@ -27,17 +27,18 @@ public class CarPolicy extends Policy {
     return this.carRegNum;
   }
 
-  // Override abstract method from Policy class to calculate basePremium.
   @Override
+  // Override abstract method from Policy class to calculate basePremium.
   public void setBasePremium() {
+    // 10% of sumInsured for drivers 25 or over.
     if (age >= 25) {
       double doublePremium = 0.10 * sumInsured;
       this.basePremium = (int) Math.round(doublePremium);
-    } else {
+    } else { // 15% of sumInsured for drivers under 25.
       double doublePremium = 0.15 * sumInsured;
       this.basePremium = (int) Math.round(doublePremium);
     }
-
+    // Add $80 if mechanical breakdown cover is selected.
     if (coverMechBreakdown) {
       this.basePremium = this.basePremium + 80;
     }

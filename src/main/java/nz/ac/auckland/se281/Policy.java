@@ -12,6 +12,7 @@ public abstract class Policy {
     this.discount = (int) Math.round(basePremium * 0.9);
     return this.discount;
   }
+
   // Method for calculating discounted premium for 3 or more policies under the same client.
   public int getDiscountedPremium3() {
     this.discount = (int) Math.round(basePremium * 0.8);
