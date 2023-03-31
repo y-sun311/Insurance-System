@@ -7,7 +7,7 @@ public abstract class Policy {
   protected int age;
   protected int discount;
 
-  // Method for calculating discounted premium for 2 policies under the same clie
+  // Method for calculating discounted premium for 2 policies under the same client.
   public int getDiscountedPremium2() {
     this.discount = (int) Math.round(basePremium * 0.9);
     return this.discount;
