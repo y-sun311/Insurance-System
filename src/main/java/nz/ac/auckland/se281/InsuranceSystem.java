@@ -332,7 +332,7 @@ public class InsuranceSystem {
   }
 
   // Print policy details.
-  public static void printPolicy(Policy policy, int discounted) {
+  public void printPolicy(Policy policy, int discounted) {
     // If the policy is a car policy.
     if (policy instanceof CarPolicy) {
       MessageCli.PRINT_DB_CAR_POLICY.printMessage(
