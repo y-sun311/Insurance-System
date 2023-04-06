@@ -26,7 +26,7 @@ public class Person {
       return 0;
     }
     for (int i = 0; i < policies.size(); i++) {
-      totalPremium += getDiscount(i);
+      totalPremium += premiumDiscounted(i);
     }
 
     return totalPremium;
@@ -34,7 +34,7 @@ public class Person {
 
   // This method getDiscount to output the discount of a policy (if not eligible for discount,
   // return basePremium).
-  public int getDiscount(int numInArrlist) {
+  public int premiumDiscounted(int numInArrlist) {
     if (policies.size() == 2) {
       return policies.get(numInArrlist).getDiscountedPremium2();
     } else if (policies.size() >= 3) {

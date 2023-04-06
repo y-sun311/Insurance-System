@@ -52,7 +52,7 @@ public class InsuranceSystem {
           for (int i = 0; i < clients.get(0).policies.size(); i++) {
             Policy policy = clients.get(0).policies.get(i);
 
-            printPolicy(policy, clients.get(0).getDiscount(i));
+            printPolicy(policy, clients.get(0).premiumDiscounted(i));
           }
         }
       } else if (clients.get(0).getLoadStatus() == 0) {
@@ -88,7 +88,7 @@ public class InsuranceSystem {
           // Print out policies depending on policy types.
           for (int i = 0; i < clients.get(0).policies.size(); i++) {
             Policy policy = clients.get(0).policies.get(i);
-            printPolicy(policy, clients.get(0).getDiscount(i));
+            printPolicy(policy, clients.get(0).premiumDiscounted(i));
           }
         }
       }
@@ -136,7 +136,7 @@ public class InsuranceSystem {
 
             for (int i = 0; i < clients.get(j).policies.size(); i++) {
               Policy policy = clients.get(j).policies.get(i);
-              printPolicy(policy, clients.get(j).getDiscount(i));
+              printPolicy(policy, clients.get(j).premiumDiscounted(i));
             }
           }
 
@@ -181,7 +181,7 @@ public class InsuranceSystem {
 
             for (int i = 0; i < clients.get(j).policies.size(); i++) {
               Policy policy = clients.get(j).policies.get(i);
-              printPolicy(policy, clients.get(j).getDiscount(i));
+              printPolicy(policy, clients.get(j).premiumDiscounted(i));
             }
           }
         }
