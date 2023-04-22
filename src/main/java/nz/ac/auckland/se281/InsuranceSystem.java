@@ -201,6 +201,10 @@ public class InsuranceSystem {
         if (clients.get(i).getName().equals(titledName)) {
           MessageCli.INVALID_USERNAME_NOT_UNIQUE.printMessage(titledName);
           return;
+          // Check if there is a currently loaded profile.
+        } else if (clients.get(i).getLoadStatus() == 1) {
+          MessageCli.CANNOT_CREATE_WHILE_LOADED.printMessage(clients.get(i).getName());
+          return;
         }
       }
     }
@@ -226,6 +230,19 @@ public class InsuranceSystem {
     String titledName =
         userName.substring(0, 1).toUpperCase() + userName.substring(1).toLowerCase();
 
+    int found = 0;
+
+    for (int k = 0; k < clients.size(); k++) {
+      if (clients.get(k).getName().equals(titledName)) {
+        found = 1;
+      }
+    }
+
+    if (found == 0) {
+      MessageCli.NO_PROFILE_FOUND_TO_LOAD.printMessage(titledName);
+      return;
+    }
+
     // Check if name matches.
     if (clients.isEmpty() == false) {
       // Check if a client is already loaded.
@@ -243,8 +260,6 @@ public class InsuranceSystem {
         }
       }
     }
-
-    MessageCli.NO_PROFILE_FOUND_TO_LOAD.printMessage(titledName);
   }
 
   public void unloadProfile() {
